@@ -1,0 +1,2421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Continuous Improvement Framework | The Quality Edge Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --dark: #0D0F14;
+  --dark2: #161A22;
+  --dark3: #1E2330;
+  --accent-blue: #2A7FFF;
+  --accent-teal: #00C9A7;
+  --accent-red: #FF4757;
+  --accent-orange: #FF8C42;
+  --text-primary: #F0EDE8;
+  --text-muted: #8B8FA8;
+  --border: rgba(201,168,76,0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0D0F14 0%, #161A22 40%, #1a1f2e 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 60px 20px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.brand-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  padding: 8px 24px;
+  border-radius: 2px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 6vw, 5.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 24px;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+.hero h1 span { color: var(--gold); }
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 700px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.author-block {
+  background: rgba(201,168,76,0.08);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 20px 36px;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
+.author-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.author-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeUp 1s 0.8s ease both;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s infinite;
+}
+
+.scroll-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+}
+
+/* NAV */
+.sticky-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,15,20,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  color: var(--gold);
+  font-weight: 700;
+  margin-right: 40px;
+  white-space: nowrap;
+}
+
+.nav-items {
+  display: flex;
+  gap: 4px;
+  flex-wrap: nowrap;
+}
+
+.nav-items a {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 2px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-items a:hover {
+  background: rgba(201,168,76,0.1);
+  color: var(--gold);
+}
+
+/* SECTIONS */
+section {
+  padding: 100px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.section-desc {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.75;
+  max-width: 750px;
+  margin-bottom: 64px;
+}
+
+/* DIVIDER */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* DEFINITION SECTION */
+.definition-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 64px;
+}
+
+.def-card {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.def-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+}
+
+.def-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+}
+
+.def-icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.def-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--gold-light);
+  margin-bottom: 14px;
+}
+
+.def-card p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* IMPROVEMENT SPECTRUM */
+.spectrum-container {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 60px;
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.spectrum-bar {
+  position: relative;
+  height: 16px;
+  background: linear-gradient(90deg, #00C9A7, #2A7FFF, #FF8C42, #FF4757);
+  border-radius: 8px;
+  margin: 40px 0;
+}
+
+.spectrum-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.spectrum-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+}
+
+.spectrum-markers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.sm-item {
+  text-align: center;
+  padding: 24px 16px;
+  border-radius: 8px;
+  border: 1px solid;
+  transition: transform 0.3s;
+}
+.sm-item:hover { transform: translateY(-4px); }
+.sm-item.st { border-color: rgba(0,201,167,0.3); background: rgba(0,201,167,0.05); }
+.sm-item.mt { border-color: rgba(42,127,255,0.3); background: rgba(42,127,255,0.05); }
+.sm-item.lt { border-color: rgba(255,140,66,0.3); background: rgba(255,140,66,0.05); }
+.sm-item.xl { border-color: rgba(255,71,87,0.3); background: rgba(255,71,87,0.05); }
+
+.sm-duration {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.sm-item.st .sm-duration { color: #00C9A7; }
+.sm-item.mt .sm-duration { color: #2A7FFF; }
+.sm-item.lt .sm-duration { color: #FF8C42; }
+.sm-item.xl .sm-duration { color: #FF4757; }
+
+.sm-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.sm-examples {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* METHODS GRID */
+.methods-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn.active, .tab-btn:hover {
+  background: rgba(201,168,76,0.1);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.methods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.method-card {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px;
+  transition: all 0.3s;
+  cursor: default;
+  position: relative;
+}
+
+.method-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.method-badge {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.badge-short { background: rgba(0,201,167,0.15); color: #00C9A7; border: 1px solid rgba(0,201,167,0.3); }
+.badge-long { background: rgba(255,140,66,0.15); color: #FF8C42; border: 1px solid rgba(255,140,66,0.3); }
+.badge-strategic { background: rgba(255,71,87,0.15); color: #FF4757; border: 1px solid rgba(255,71,87,0.3); }
+.badge-cultural { background: rgba(42,127,255,0.15); color: #2A7FFF; border: 1px solid rgba(42,127,255,0.3); }
+
+.method-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+
+.method-origin {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.method-card p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+
+.method-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.mtag {
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  color: var(--text-muted);
+}
+
+/* BEFORE/AFTER VISUAL */
+.ba-section {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.ba-header {
+  padding: 32px 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.ba-grid {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+}
+
+.ba-side {
+  padding: 40px;
+}
+
+.ba-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ba-label.before { color: #FF4757; }
+.ba-label.after { color: #00C9A7; }
+
+.ba-label::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.ba-items { display: flex; flex-direction: column; gap: 12px; }
+
+.ba-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.ba-item .bi {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.before .bi { background: rgba(255,71,87,0.15); color: #FF4757; }
+.after .bi { background: rgba(0,201,167,0.15); color: #00C9A7; }
+
+.ba-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201,168,76,0.05);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.arrow-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* METRICS / MEASUREMENT */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.metric-card {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px 24px;
+  text-align: center;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+}
+
+.metric-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.metric-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.metric-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.metric-trend {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.trend-up { color: #00C9A7; }
+.trend-down { color: #FF4757; }
+
+/* PDCA / DMAIC FLOW */
+.flow-container {
+  display: flex;
+  gap: 0;
+  margin-bottom: 64px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+}
+
+.flow-step {
+  flex: 1;
+  min-width: 160px;
+  position: relative;
+}
+
+.flow-step-inner {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 20px;
+  text-align: center;
+  margin-right: 20px;
+  transition: all 0.3s;
+  height: 100%;
+}
+
+.flow-step-inner:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+}
+
+.flow-step::after {
+  content: '→';
+  position: absolute;
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 1.2rem;
+  z-index: 1;
+}
+
+.flow-step:last-child::after { display: none; }
+
+.flow-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(201,168,76,0.15);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.flow-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.flow-name {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.flow-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ENTERPRISE ECOSYSTEM */
+.eco-container {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 60px;
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.eco-layers {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.eco-layer {
+  border-radius: 8px;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  transition: transform 0.2s;
+}
+
+.eco-layer:hover { transform: translateX(8px); }
+
+.eco-layer-1 {
+  background: linear-gradient(90deg, rgba(255,71,87,0.1), rgba(255,71,87,0.02));
+  border: 1px solid rgba(255,71,87,0.2);
+}
+
+.eco-layer-2 {
+  background: linear-gradient(90deg, rgba(255,140,66,0.1), rgba(255,140,66,0.02));
+  border: 1px solid rgba(255,140,66,0.2);
+  margin-left: 20px;
+}
+
+.eco-layer-3 {
+  background: linear-gradient(90deg, rgba(201,168,76,0.1), rgba(201,168,76,0.02));
+  border: 1px solid rgba(201,168,76,0.2);
+  margin-left: 40px;
+}
+
+.eco-layer-4 {
+  background: linear-gradient(90deg, rgba(42,127,255,0.1), rgba(42,127,255,0.02));
+  border: 1px solid rgba(42,127,255,0.2);
+  margin-left: 60px;
+}
+
+.eco-layer-5 {
+  background: linear-gradient(90deg, rgba(0,201,167,0.1), rgba(0,201,167,0.02));
+  border: 1px solid rgba(0,201,167,0.2);
+  margin-left: 80px;
+}
+
+.eco-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  min-width: 48px;
+  text-align: center;
+}
+
+.eco-layer-1 .eco-num { color: #FF4757; }
+.eco-layer-2 .eco-num { color: #FF8C42; }
+.eco-layer-3 .eco-num { color: var(--gold); }
+.eco-layer-4 .eco-num { color: #2A7FFF; }
+.eco-layer-5 .eco-num { color: #00C9A7; }
+
+.eco-content h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.eco-content p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.eco-tags {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+  min-width: 200px;
+}
+
+/* PHOTO GALLERY STYLE */
+.visual-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.visual-card {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+  position: relative;
+}
+
+.visual-card:hover {
+  border-color: var(--gold);
+  transform: scale(1.02);
+}
+
+.visual-img {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.visual-img.factory { background: linear-gradient(135deg, #1a1f2e, #0d1117); }
+.visual-img.office { background: linear-gradient(135deg, #1a1f2e, #1e2330); }
+.visual-img.data { background: linear-gradient(135deg, #0d1117, #1a1f2e); }
+
+.visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,15,20,0.95) 0%, transparent 60%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.visual-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.visual-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* KPI TABLE */
+.kpi-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.kpi-table thead tr {
+  background: rgba(201,168,76,0.08);
+  border-bottom: 1px solid var(--border);
+}
+
+.kpi-table th {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  padding: 16px 20px;
+  text-align: left;
+}
+
+.kpi-table td {
+  padding: 16px 20px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: top;
+}
+
+.kpi-table tr:last-child td { border-bottom: none; }
+
+.kpi-table tr:hover td { background: rgba(201,168,76,0.03); }
+
+.kpi-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+}
+
+.dot-bar {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot.filled { background: var(--gold); }
+.dot.empty { background: rgba(201,168,76,0.15); }
+
+/* MATURITY MODEL */
+.maturity-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 48px;
+}
+
+.mat-level {
+  border-radius: 8px;
+  padding: 24px 16px;
+  text-align: center;
+  border: 1px solid;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.mat-level:hover { transform: translateY(-6px); }
+
+.mat-level-1 { border-color: rgba(255,71,87,0.3); background: rgba(255,71,87,0.05); }
+.mat-level-2 { border-color: rgba(255,140,66,0.3); background: rgba(255,140,66,0.05); }
+.mat-level-3 { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.05); }
+.mat-level-4 { border-color: rgba(42,127,255,0.3); background: rgba(42,127,255,0.05); }
+.mat-level-5 { border-color: rgba(0,201,167,0.3); background: rgba(0,201,167,0.05); }
+
+.mat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.mat-level-1 .mat-num { color: #FF4757; }
+.mat-level-2 .mat-num { color: #FF8C42; }
+.mat-level-3 .mat-num { color: var(--gold); }
+.mat-level-4 .mat-num { color: #2A7FFF; }
+.mat-level-5 .mat-num { color: #00C9A7; }
+
+.mat-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.mat-level-1 .mat-title { color: #FF4757; }
+.mat-level-2 .mat-title { color: #FF8C42; }
+.mat-level-3 .mat-title { color: var(--gold); }
+.mat-level-4 .mat-title { color: #2A7FFF; }
+.mat-level-5 .mat-title { color: #00C9A7; }
+
+.mat-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* AUDIENCE SECTION */
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.aud-card {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.aud-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+}
+
+.aud-icon { font-size: 2.5rem; margin-bottom: 16px; }
+
+.aud-role {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+
+.aud-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+
+.aud-methods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+
+.aud-tag {
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--gold);
+}
+
+/* FOOTER */
+.footer {
+  background: var(--dark2);
+  border-top: 1px solid var(--border);
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.footer-author {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: rgba(139,143,168,0.5);
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* FULL WIDTH DIVIDERS */
+.full-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+  width: 100%;
+}
+
+/* CALLOUT BOX */
+.callout {
+  background: rgba(201,168,76,0.06);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--gold);
+  border-radius: 4px;
+  padding: 24px 32px;
+  margin-bottom: 32px;
+}
+
+.callout h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: var(--gold-light);
+  margin-bottom: 8px;
+}
+
+.callout p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* PILL */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.pill.gold { border-color: rgba(201,168,76,0.4); color: var(--gold); background: rgba(201,168,76,0.08); }
+.pill.teal { border-color: rgba(0,201,167,0.4); color: #00C9A7; background: rgba(0,201,167,0.08); }
+.pill.red { border-color: rgba(255,71,87,0.4); color: #FF4757; background: rgba(255,71,87,0.08); }
+.pill.blue { border-color: rgba(42,127,255,0.4); color: #2A7FFF; background: rgba(42,127,255,0.08); }
+
+/* SVG CHARTS */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.chart-box {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px;
+}
+
+.chart-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .definition-grid { grid-template-columns: 1fr; }
+  .ba-grid { grid-template-columns: 1fr; }
+  .ba-arrow { display: none; }
+  .maturity-grid { grid-template-columns: repeat(3, 1fr); }
+  .visual-grid { grid-template-columns: 1fr 1fr; }
+  .chart-row { grid-template-columns: 1fr; }
+  section { padding: 60px 20px; }
+  .eco-layer-2, .eco-layer-3, .eco-layer-4, .eco-layer-5 { margin-left: 0; }
+}
+
+@media (max-width: 600px) {
+  .maturity-grid { grid-template-columns: 1fr 1fr; }
+  .spectrum-markers { grid-template-columns: 1fr 1fr; }
+  .visual-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="brand-tag">Enterprise Learning Framework · 2024</div>
+  <h1>Continuous<br><span>Improvement</span><br>Methods</h1>
+  <p class="hero-sub">A comprehensive enterprise framework for understanding, selecting, and applying improvement methodologies — from rapid Kaizen events to multi-year transformation programs.</p>
+  <div class="author-block">
+    <div class="author-name">Subramanian Shanmugam</div>
+    <div class="author-title">Quality Excellence Governance · The Quality Edge Group</div>
+  </div>
+  <div class="scroll-cue">
+    <div class="scroll-label">Scroll</div>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav">
+  <div class="nav-logo">QEG ◆</div>
+  <div class="nav-items">
+    <a href="#definition">Definition</a>
+    <a href="#spectrum">Spectrum</a>
+    <a href="#methods">Methods</a>
+    <a href="#before-after">Before/After</a>
+    <a href="#measurement">Measurement</a>
+    <a href="#pdca">PDCA/DMAIC</a>
+    <a href="#ecosystem">Ecosystem</a>
+    <a href="#maturity">Maturity</a>
+    <a href="#audience">Audience</a>
+    <a href="#kpi">KPIs</a>
+  </div>
+</nav>
+
+<!-- DEFINITION -->
+<section id="definition">
+  <div class="section-label">01 · Foundation</div>
+  <h2 class="section-title">What is Continuous<br>Improvement?</h2>
+  <p class="section-desc">Continuous Improvement (CI) is the ongoing practice of identifying, analyzing, and enhancing processes, products, services, and culture — incrementally and systematically — to deliver greater value with less waste.</p>
+
+  <div class="definition-grid">
+    <div class="def-card">
+      <div class="def-icon">🔄</div>
+      <h3>Kaizen Philosophy</h3>
+      <p>From Japanese "change for better" — the belief that every process can be improved, and that small, frequent improvements are more sustainable than rare large leaps. Everyone, from shop floor to C-suite, is responsible.</p>
+    </div>
+    <div class="def-card">
+      <div class="def-icon">📐</div>
+      <h3>Scientific Method Applied</h3>
+      <p>CI is structured problem-solving: define the current state, hypothesize root causes, test solutions, measure results, and standardize gains. Emotion is replaced with data-driven decision making.</p>
+    </div>
+    <div class="def-card">
+      <div class="def-icon">🎯</div>
+      <h3>Value-Centric Thinking</h3>
+      <p>Every improvement must connect to customer value. Activities that consume resources without adding value (waste) are targeted for elimination. Value Stream Mapping reveals the true flow of value.</p>
+    </div>
+    <div class="def-card">
+      <div class="def-icon">🏗️</div>
+      <h3>System-Level Change</h3>
+      <p>True CI is not isolated fixes — it is a management system, a culture, and a discipline. It transforms how organizations think, plan, execute, and learn across all levels and functions.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h4>💡 Core Principle</h4>
+    <p>"If you always do what you always did, you will always get what you always got." — Continuous Improvement challenges the status quo at every level, demanding that leaders create environments where questioning processes is encouraged, not penalized.</p>
+  </div>
+
+  <div style="display:flex;gap:12px;flex-wrap:wrap;">
+    <span class="pill gold">● Process Excellence</span>
+    <span class="pill teal">● Waste Elimination</span>
+    <span class="pill blue">● Data-Driven</span>
+    <span class="pill red">● Customer-Centric</span>
+    <span class="pill gold">● People-Led</span>
+    <span class="pill teal">● Sustained Culture</span>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- IMPROVEMENT SPECTRUM -->
+<section id="spectrum">
+  <div class="section-label">02 · Time Horizon</div>
+  <h2 class="section-title">The Improvement Spectrum</h2>
+  <p class="section-desc">Not all improvement methods are equal in time, complexity, or investment. Understanding where a method sits on the spectrum is critical to selecting the right tool for the right problem.</p>
+
+  <div class="spectrum-container">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);">TACTICAL · IMMEDIATE</span>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-muted);">STRATEGIC · TRANSFORMATIONAL</span>
+    </div>
+    <div class="spectrum-bar"></div>
+    <div class="spectrum-labels">
+      <span class="spectrum-label">Days–Weeks</span>
+      <span class="spectrum-label">Weeks–Months</span>
+      <span class="spectrum-label">Months–Year</span>
+      <span class="spectrum-label">Multi-Year</span>
+    </div>
+
+    <div class="spectrum-markers">
+      <div class="sm-item st">
+        <div class="sm-duration">SHORT TERM</div>
+        <div class="sm-title">Rapid Improvement</div>
+        <div class="sm-examples">Kaizen Blitz · 5S · Poka-Yoke · Gemba Walk · Quick Wins · Andon</div>
+      </div>
+      <div class="sm-item mt">
+        <div class="sm-duration">MEDIUM TERM</div>
+        <div class="sm-title">Process Improvement</div>
+        <div class="sm-examples">Six Sigma DMAIC · VSM · 8D · A3 Thinking · FMEA · SPC</div>
+      </div>
+      <div class="sm-item lt">
+        <div class="sm-duration">LONG TERM</div>
+        <div class="sm-title">System Redesign</div>
+        <div class="sm-examples">Lean Transformation · BPR · TPM · ISO Systems · TQM · Hoshin Kanri</div>
+      </div>
+      <div class="sm-item xl">
+        <div class="sm-duration">STRATEGIC</div>
+        <div class="sm-title">Enterprise Transformation</div>
+        <div class="sm-examples">Industry 4.0 · Digital Lean · Agile/DevOps · Culture Change · Operational Excellence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- ALL METHODS -->
+<section id="methods">
+  <div class="section-label">03 · Complete Method Library</div>
+  <h2 class="section-title">All Improvement Methods</h2>
+  <p class="section-desc">An enterprise-grade library of over 30 proven improvement methods — classified by time horizon, complexity, and application context. Each method includes origin, purpose, and ideal use case.</p>
+
+  <div class="methods-grid">
+
+    <!-- SHORT TERM METHODS -->
+    <div class="method-card">
+      <span class="method-badge badge-short">Short Term</span>
+      <h3>Kaizen</h3>
+      <div class="method-origin">Origin: Japan · Toyota Production System</div>
+      <p>Small, daily incremental improvements involving all employees. Kaizen events (blitzes) are focused 3–5 day workshops targeting a specific process. The philosophy: 1% better every day = 37× better in a year.</p>
+      <div class="method-tags">
+        <span class="mtag">All Industries</span>
+        <span class="mtag">Team-Based</span>
+        <span class="mtag">Low Cost</span>
+        <span class="mtag">Culture</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-short">Short Term</span>
+      <h3>5S / 6S</h3>
+      <div class="method-origin">Origin: Japan · Hiroyuki Hirano</div>
+      <p>Sort, Set in Order, Shine, Standardize, Sustain (+ Safety). Creates organized, visual, efficient workplaces. Foundation of all Lean programs. Typical ROI: 20–30% productivity gain in target area within weeks.</p>
+      <div class="method-tags">
+        <span class="mtag">Workplace Organization</span>
+        <span class="mtag">Visual Management</span>
+        <span class="mtag">Safety</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-short">Short Term</span>
+      <h3>Poka-Yoke</h3>
+      <div class="method-origin">Origin: Japan · Shigeo Shingo</div>
+      <p>"Mistake-proofing" — designing processes or devices to prevent errors from occurring. Hardware (physical stops, sensors) or software (mandatory fields, warnings). Makes defects impossible or immediately detectable.</p>
+      <div class="method-tags">
+        <span class="mtag">Error Prevention</span>
+        <span class="mtag">Quality</span>
+        <span class="mtag">Design</span>
+        <span class="mtag">Zero Defect</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-short">Short Term</span>
+      <h3>Gemba Walk</h3>
+      <div class="method-origin">Origin: Japan · Lean Manufacturing</div>
+      <p>Leaders go to where work is done to observe, ask questions, and learn — not to manage. "Gemba" means the real place. Weekly walks uncover real problems invisible in reports and builds trust between leaders and workers.</p>
+      <div class="method-tags">
+        <span class="mtag">Leadership</span>
+        <span class="mtag">Observation</span>
+        <span class="mtag">Culture</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-short">Short Term</span>
+      <h3>Andon</h3>
+      <div class="method-origin">Origin: Japan · Toyota</div>
+      <p>A visual signal system that alerts supervisors to quality or process problems in real-time. Workers pull a cord or press a button to stop the line. Philosophy: "Stop to fix" rather than "build in defects."</p>
+      <div class="method-tags">
+        <span class="mtag">Real-Time Alert</span>
+        <span class="mtag">Manufacturing</span>
+        <span class="mtag">Stop-Fix</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-short">Short Term</span>
+      <h3>5 Whys</h3>
+      <div class="method-origin">Origin: Japan · Sakichi Toyoda</div>
+      <p>Ask "Why?" five times to peel back the layers of symptoms and reach the root cause of a problem. Simple, fast, and powerfully effective for non-technical teams. Best used for human/process failures.</p>
+      <div class="method-tags">
+        <span class="mtag">Root Cause</span>
+        <span class="mtag">Problem Solving</span>
+        <span class="mtag">Universal</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-short">Short Term</span>
+      <h3>Visual Management</h3>
+      <div class="method-origin">Origin: Lean · TPS</div>
+      <p>Making performance, standards, and abnormalities visible at a glance through scoreboards, kanban boards, color codes, and floor markings. "If you can't see it, you can't manage it."</p>
+      <div class="method-tags">
+        <span class="mtag">Transparency</span>
+        <span class="mtag">Real-Time</span>
+        <span class="mtag">All Levels</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-short">Short Term</span>
+      <h3>Kanban</h3>
+      <div class="method-origin">Origin: Japan · Toyota · Taiichi Ohno</div>
+      <p>A visual scheduling system using cards or digital boards to manage work-in-progress and create pull-based flow. Limits work in progress, reduces multitasking, exposes bottlenecks instantly.</p>
+      <div class="method-tags">
+        <span class="mtag">Pull System</span>
+        <span class="mtag">Flow Management</span>
+        <span class="mtag">WIP Control</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-short">Short Term</span>
+      <h3>Quick Changeover (SMED)</h3>
+      <div class="method-origin">Origin: Japan · Shigeo Shingo</div>
+      <p>Single Minute Exchange of Die — techniques to reduce equipment changeover time to under 10 minutes. Increases capacity and flexibility by converting internal setup activities to external ones.</p>
+      <div class="method-tags">
+        <span class="mtag">Flexibility</span>
+        <span class="mtag">OEE</span>
+        <span class="mtag">Manufacturing</span>
+      </div>
+    </div>
+
+    <!-- MEDIUM TERM -->
+    <div class="method-card">
+      <span class="method-badge badge-long">Medium Term</span>
+      <h3>Six Sigma (DMAIC)</h3>
+      <div class="method-origin">Origin: USA · Motorola · GE · 1986</div>
+      <p>Data-driven methodology to reduce variation and defects to 3.4 DPMO (3.4 defects per million opportunities). DMAIC: Define, Measure, Analyze, Improve, Control. Requires statistical tools (Minitab, R).</p>
+      <div class="method-tags">
+        <span class="mtag">Statistical</span>
+        <span class="mtag">Quality</span>
+        <span class="mtag">Data-Driven</span>
+        <span class="mtag">Certified Belts</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-long">Medium Term</span>
+      <h3>A3 Problem Solving</h3>
+      <div class="method-origin">Origin: Japan · Toyota</div>
+      <p>A structured one-page (A3 paper size) thinking and problem-solving process. Forces discipline: background, current state, goal, root cause analysis, countermeasures, follow-up — all on one page. Promotes thinking before acting.</p>
+      <div class="method-tags">
+        <span class="mtag">PDCA-Based</span>
+        <span class="mtag">Structured Thinking</span>
+        <span class="mtag">Leadership Tool</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-long">Medium Term</span>
+      <h3>FMEA</h3>
+      <div class="method-origin">Origin: USA · NASA/Military · 1949</div>
+      <p>Failure Mode and Effects Analysis — proactively identifies potential failure modes, assesses their severity, occurrence, and detectability (Risk Priority Number), and drives preventive action before failures occur.</p>
+      <div class="method-tags">
+        <span class="mtag">Risk Management</span>
+        <span class="mtag">Proactive</span>
+        <span class="mtag">Design Quality</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-long">Medium Term</span>
+      <h3>8D Problem Solving</h3>
+      <div class="method-origin">Origin: USA · Ford Motor Company · 1987</div>
+      <p>8 Disciplines for team-oriented problem solving. Includes containment actions, root cause analysis, and permanent corrective actions. Standard in automotive (IATF 16949) and widely adopted in manufacturing.</p>
+      <div class="method-tags">
+        <span class="mtag">Automotive</span>
+        <span class="mtag">Team-Based</span>
+        <span class="mtag">Corrective Action</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-long">Medium Term</span>
+      <h3>Value Stream Mapping</h3>
+      <div class="method-origin">Origin: Lean Manufacturing · MIT</div>
+      <p>Visualizes the entire flow of material and information from supplier to customer. Identifies value-added vs. non-value-added activities (waste). Creates "current state" and "future state" maps for improvement roadmaps.</p>
+      <div class="method-tags">
+        <span class="mtag">Flow Analysis</span>
+        <span class="mtag">Waste Identification</span>
+        <span class="mtag">Strategic</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-long">Medium Term</span>
+      <h3>SPC / Control Charts</h3>
+      <div class="method-origin">Origin: USA · Walter Shewhart · 1924</div>
+      <p>Statistical Process Control monitors process performance over time using control charts. Distinguishes common cause variation (system noise) from special cause variation (signals requiring action). Foundation of process stability.</p>
+      <div class="method-tags">
+        <span class="mtag">Statistical</span>
+        <span class="mtag">Monitoring</span>
+        <span class="mtag">Process Stability</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-long">Medium Term</span>
+      <h3>Design of Experiments (DOE)</h3>
+      <div class="method-origin">Origin: UK · Ronald Fisher · 1920s</div>
+      <p>Structured, planned experiments to determine which process inputs most significantly affect outputs. Enables optimization of multiple variables simultaneously. Essential in R&D, formulation, and complex manufacturing.</p>
+      <div class="method-tags">
+        <span class="mtag">R&D</span>
+        <span class="mtag">Optimization</span>
+        <span class="mtag">Advanced Statistics</span>
+      </div>
+    </div>
+
+    <!-- LONG TERM -->
+    <div class="method-card">
+      <span class="method-badge badge-strategic">Long Term</span>
+      <h3>Lean Transformation</h3>
+      <div class="method-origin">Origin: Japan → USA · Womack & Jones · 1996</div>
+      <p>Systemic elimination of the 8 wastes (TIMWOODS) across an enterprise. Requires leadership commitment, cultural change, and restructuring of flows, metrics, and management systems. Takes 3–7 years to fully embed.</p>
+      <div class="method-tags">
+        <span class="mtag">Enterprise-Wide</span>
+        <span class="mtag">Culture Change</span>
+        <span class="mtag">Multi-Year</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-strategic">Long Term</span>
+      <h3>TQM — Total Quality Management</h3>
+      <div class="method-origin">Origin: USA/Japan · Deming · Juran · 1950s–80s</div>
+      <p>Organization-wide commitment to quality in all activities. Customer-focused, data-driven, involving every employee. Foundation of Malcolm Baldrige, EFQM, and ISO 9001 standards. The philosophy behind modern quality systems.</p>
+      <div class="method-tags">
+        <span class="mtag">Philosophy</span>
+        <span class="mtag">All Functions</span>
+        <span class="mtag">Culture</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-strategic">Long Term</span>
+      <h3>Hoshin Kanri</h3>
+      <div class="method-origin">Origin: Japan · Policy Deployment</div>
+      <p>Strategy deployment system that cascades organizational goals from top management to all levels through structured "catch-ball" dialogue. Aligns daily improvement activities with 3–5 year strategic objectives. The CI strategic compass.</p>
+      <div class="method-tags">
+        <span class="mtag">Strategy</span>
+        <span class="mtag">Alignment</span>
+        <span class="mtag">Annual Planning</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-strategic">Long Term</span>
+      <h3>TPM — Total Productive Maintenance</h3>
+      <div class="method-origin">Origin: Japan · JIPM · 1971</div>
+      <p>Aims for zero breakdowns, zero defects, and zero accidents through proactive and preventive maintenance involving all employees. OEE (Overall Equipment Effectiveness) is the primary KPI. Takes 3–5 years for full deployment.</p>
+      <div class="method-tags">
+        <span class="mtag">Equipment Reliability</span>
+        <span class="mtag">OEE</span>
+        <span class="mtag">Manufacturing</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-strategic">Long Term</span>
+      <h3>Business Process Reengineering</h3>
+      <div class="method-origin">Origin: USA · Hammer & Champy · 1990</div>
+      <p>Radical redesign of core business processes for dramatic improvements in cost, quality, service, and speed. Unlike incremental CI, BPR challenges fundamental assumptions. Typically triggered by digital transformation or competitive disruption.</p>
+      <div class="method-tags">
+        <span class="mtag">Radical Change</span>
+        <span class="mtag">Digital</span>
+        <span class="mtag">Cost Reduction</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-cultural">Cultural</span>
+      <h3>Lean Six Sigma</h3>
+      <div class="method-origin">Origin: USA · AlliedSignal · 1990s</div>
+      <p>Combines Lean's speed and waste elimination with Six Sigma's statistical rigor and defect reduction. DMAIC roadmap with Lean tools embedded throughout. Most widely deployed methodology in manufacturing and services globally.</p>
+      <div class="method-tags">
+        <span class="mtag">Hybrid</span>
+        <span class="mtag">Comprehensive</span>
+        <span class="mtag">Belt Certification</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-cultural">Cultural</span>
+      <h3>Theory of Constraints (TOC)</h3>
+      <div class="method-origin">Origin: Israel · Eliyahu Goldratt · 1984</div>
+      <p>Every system has a constraint (bottleneck) limiting throughput. TOC's 5-step focusing process: Identify, Exploit, Subordinate, Elevate, and Repeat. The Goal: maximize throughput while reducing inventory and operating expense.</p>
+      <div class="method-tags">
+        <span class="mtag">Throughput</span>
+        <span class="mtag">Bottleneck</span>
+        <span class="mtag">Systems Thinking</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-cultural">Cultural</span>
+      <h3>Agile / Scrum</h3>
+      <div class="method-origin">Origin: USA · Agile Manifesto · 2001</div>
+      <p>Iterative development in short sprints (2–4 weeks) with continuous feedback loops. Retrospectives are built-in CI events. Originally software, now applied in project management, marketing, and operations. Daily standups = mini-Gemba walks.</p>
+      <div class="method-tags">
+        <span class="mtag">Iterative</span>
+        <span class="mtag">Software/IT</span>
+        <span class="mtag">Team Empowerment</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-cultural">Cultural</span>
+      <h3>Design Thinking</h3>
+      <div class="method-origin">Origin: Stanford d.school · IDEO</div>
+      <p>Human-centered innovation process: Empathize, Define, Ideate, Prototype, Test. Solves problems by deeply understanding user needs. Complements CI by ensuring improvements address the right problems. Bridges creativity and analysis.</p>
+      <div class="method-tags">
+        <span class="mtag">Innovation</span>
+        <span class="mtag">Customer Focus</span>
+        <span class="mtag">Service Design</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-short">Analytical</span>
+      <h3>Ishikawa / Fishbone Diagram</h3>
+      <div class="method-origin">Origin: Japan · Kaoru Ishikawa · 1960</div>
+      <p>Cause-and-Effect diagram organizing potential causes of a problem into 6M categories: Man, Machine, Method, Material, Measurement, Mother Nature (Environment). Facilitates team brainstorming and structured root cause analysis.</p>
+      <div class="method-tags">
+        <span class="mtag">Root Cause</span>
+        <span class="mtag">Visual Tool</span>
+        <span class="mtag">Team Workshop</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-long">Strategic</span>
+      <h3>Balanced Scorecard</h3>
+      <div class="method-origin">Origin: USA · Kaplan & Norton · 1992</div>
+      <p>Translates strategy into measurable objectives across 4 perspectives: Financial, Customer, Internal Process, and Learning & Growth. Links CI activities to strategic outcomes. The bridge between improvement and business performance.</p>
+      <div class="method-tags">
+        <span class="mtag">Strategy KPIs</span>
+        <span class="mtag">4 Perspectives</span>
+        <span class="mtag">Executive Tool</span>
+      </div>
+    </div>
+
+    <div class="method-card">
+      <span class="method-badge badge-short">Analytical</span>
+      <h3>Pareto Analysis (80/20)</h3>
+      <div class="method-origin">Origin: Italy · Vilfredo Pareto · Applied by Juran</div>
+      <p>80% of problems come from 20% of causes. Prioritizes improvement efforts by identifying the vital few causes that drive the majority of defects, delays, or costs. Essential first step in any improvement project.</p>
+      <div class="method-tags">
+        <span class="mtag">Prioritization</span>
+        <span class="mtag">Data Analysis</span>
+        <span class="mtag">Universal</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- BEFORE / AFTER -->
+<section id="before-after">
+  <div class="section-label">04 · Transformation Evidence</div>
+  <h2 class="section-title">Before & After Improvement</h2>
+  <p class="section-desc">Real improvement is visible, measurable, and sustained. The following scenarios illustrate the tangible transformation CI methods create across different environments.</p>
+
+  <!-- Visual scenario cards -->
+  <div class="visual-grid" style="margin-bottom:40px;">
+    <div class="visual-card">
+      <div class="visual-img factory" style="background:linear-gradient(135deg,#1a1f2e,#0d1117);">
+        <div class="visual-overlay">
+          <div style="display:flex;gap:8px;margin-bottom:8px;">
+            <span class="pill red" style="font-size:8px;">BEFORE</span>
+          </div>
+          <div class="visual-title">🏭 Cluttered Production Floor</div>
+          <div class="visual-sub">Tools scattered · No visual standards · 35% search time waste</div>
+        </div>
+        <span style="font-size:5rem;opacity:0.3;">🏭</span>
+      </div>
+    </div>
+    <div class="visual-card">
+      <div class="visual-img factory" style="background:linear-gradient(135deg,#0d1a14,#0d1117);">
+        <div class="visual-overlay">
+          <div style="display:flex;gap:8px;margin-bottom:8px;">
+            <span class="pill teal" style="font-size:8px;">AFTER 5S</span>
+          </div>
+          <div class="visual-title">✨ Organized Visual Workplace</div>
+          <div class="visual-sub">Shadow boards · Color coding · 98% tool availability</div>
+        </div>
+        <span style="font-size:5rem;opacity:0.3;">✨</span>
+      </div>
+    </div>
+    <div class="visual-card">
+      <div class="visual-img data" style="background:linear-gradient(135deg,#0d1020,#0d1117);">
+        <div class="visual-overlay">
+          <div style="display:flex;gap:8px;margin-bottom:8px;">
+            <span class="pill gold" style="font-size:8px;">IMPROVEMENT</span>
+          </div>
+          <div class="visual-title">📊 Data-Driven Results</div>
+          <div class="visual-sub">Before vs. After KPI comparison · Sustained gains</div>
+        </div>
+        <span style="font-size:5rem;opacity:0.3;">📊</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER Comparison: Manufacturing -->
+  <div class="ba-section" style="margin-bottom:32px;">
+    <div class="ba-header">
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <div>
+          <div class="section-label" style="margin-bottom:4px;">Scenario 01</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;">Manufacturing Line — Kaizen + 5S Application</h3>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <span class="pill gold">Kaizen</span>
+          <span class="pill teal">5S</span>
+          <span class="pill blue">SMED</span>
+        </div>
+      </div>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-side before">
+        <div class="ba-label before">Before</div>
+        <div class="ba-items">
+          <div class="ba-item"><div class="bi">✗</div>Changeover time: 4.5 hours between product runs</div>
+          <div class="ba-item"><div class="bi">✗</div>Tools stored in central room — 20 min average retrieval time</div>
+          <div class="ba-item"><div class="bi">✗</div>18% defect rate on line B — no root cause identified</div>
+          <div class="ba-item"><div class="bi">✗</div>Operators unsure which version of procedure is current</div>
+          <div class="ba-item"><div class="bi">✗</div>Machine downtime: 34% unplanned, no preventive schedule</div>
+          <div class="ba-item"><div class="bi">✗</div>Floor space cluttered — 40% inaccessible during audit</div>
+        </div>
+      </div>
+      <div class="ba-arrow"><div class="arrow-icon">→</div></div>
+      <div class="ba-side after">
+        <div class="ba-label after">After</div>
+        <div class="ba-items">
+          <div class="ba-item"><div class="bi">✓</div>Changeover time: 38 minutes (SMED — 86% reduction)</div>
+          <div class="ba-item"><div class="bi">✓</div>Shadow boards at point-of-use — zero retrieval time</div>
+          <div class="ba-item"><div class="bi">✓</div>Defect rate: 1.2% — Poka-Yoke device installed (σ improvement)</div>
+          <div class="ba-item"><div class="bi">✓</div>Visual SOPs laminated at each station — one-point lessons</div>
+          <div class="ba-item"><div class="bi">✓</div>OEE improved from 51% to 78% — TPM schedule implemented</div>
+          <div class="ba-item"><div class="bi">✓</div>Floor space reclaimed: 25% freed — new cell layout</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEFORE / AFTER: Office/Service -->
+  <div class="ba-section" style="margin-bottom:32px;">
+    <div class="ba-header">
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <div>
+          <div class="section-label" style="margin-bottom:4px;">Scenario 02</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.4rem;">Service Process — DMAIC Six Sigma Project</h3>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:8px;">
+          <span class="pill gold">DMAIC</span>
+          <span class="pill blue">VSM</span>
+          <span class="pill teal">SPC</span>
+        </div>
+      </div>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-side before">
+        <div class="ba-label before">Before</div>
+        <div class="ba-items">
+          <div class="ba-item"><div class="bi">✗</div>Invoice processing: 14 days average cycle time</div>
+          <div class="ba-item"><div class="bi">✗</div>Error rate: 23% — manual data re-entry at 3 stages</div>
+          <div class="ba-item"><div class="bi">✗</div>Customer complaints: 47/month related to billing errors</div>
+          <div class="ba-item"><div class="bi">✗</div>5 handoffs with no ownership tracking</div>
+          <div class="ba-item"><div class="bi">✗</div>No SLA in place — response time varied 2–20 days</div>
+          <div class="ba-item"><div class="bi">✗</div>Cost of poor quality (COPQ): $180,000/year estimated</div>
+        </div>
+      </div>
+      <div class="ba-arrow"><div class="arrow-icon">→</div></div>
+      <div class="ba-side after">
+        <div class="ba-label after">After</div>
+        <div class="ba-items">
+          <div class="ba-item"><div class="bi">✓</div>Invoice processing: 3.2 days (77% cycle time reduction)</div>
+          <div class="ba-item"><div class="bi">✓</div>Error rate: 1.8% — automated validation rules deployed</div>
+          <div class="ba-item"><div class="bi">✓</div>Customer complaints: 4/month (91% reduction)</div>
+          <div class="ba-item"><div class="bi">✓</div>Single-owner process with digital tracking dashboard</div>
+          <div class="ba-item"><div class="bi">✓</div>SLA: 5-day commitment — 97% on-time compliance</div>
+          <div class="ba-item"><div class="bi">✓</div>COPQ reduced to $22,000/year — $158,000 annual savings</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- MEASUREMENT SECTION -->
+<section id="measurement">
+  <div class="section-label">05 · How We Measure Improvement</div>
+  <h2 class="section-title">Show It. Calculate It.<br>Monitor It.</h2>
+  <p class="section-desc">Improvement without measurement is opinion. CI programs must quantify the baseline, track progress, and demonstrate sustained gains using a structured measurement system.</p>
+
+  <div class="callout">
+    <h4>📏 The Golden Rule of CI Measurement</h4>
+    <p><strong style="color:var(--gold-light);">Baseline → Target → Actual → Trend.</strong> Every project must establish a pre-improvement baseline (at least 4–6 weeks of data), set a SMART target, measure actual results post-implementation, and monitor the trend over 60–90 days to confirm sustainment before closing.</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-value">σ</div>
+      <div class="metric-label">Sigma Level</div>
+      <div class="metric-desc">Process capability metric. World-class = 6σ (3.4 DPMO). Most organizations operate at 3–4σ (6,200–66,800 DPMO).</div>
+      <div class="metric-trend trend-up">↑ Higher is better</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">OEE</div>
+      <div class="metric-label">Equipment Effectiveness</div>
+      <div class="metric-desc">OEE = Availability × Performance × Quality. World-class = 85%+. Measures true productive capacity of equipment.</div>
+      <div class="metric-trend trend-up">↑ Target ≥85%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">Cpk</div>
+      <div class="metric-label">Process Capability Index</div>
+      <div class="metric-desc">Measures how well a process fits within specification limits. Cpk ≥1.33 = capable. ≥1.67 = highly capable (automotive standard).</div>
+      <div class="metric-trend trend-up">↑ Target ≥1.33</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">DPMO</div>
+      <div class="metric-label">Defects Per Million Opportunities</div>
+      <div class="metric-desc">Normalized defect rate enabling comparison across processes of different complexity. 3.4 DPMO = Six Sigma performance.</div>
+      <div class="metric-trend trend-down">↓ Lower is better</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">CT</div>
+      <div class="metric-label">Cycle Time Reduction</div>
+      <div class="metric-desc">Measures end-to-end process speed improvement. Compare pre/post project cycle times. Value-add ratio = VA time / Total time.</div>
+      <div class="metric-trend trend-down">↓ Reduce waste time</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">ROI</div>
+      <div class="metric-label">Return on Investment</div>
+      <div class="metric-desc">Financial impact = (Benefits – Costs) / Costs × 100%. CI projects typically deliver 5:1 to 20:1 ROI. Hard savings + soft savings tracked separately.</div>
+      <div class="metric-trend trend-up">↑ Justify investment</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">FTY</div>
+      <div class="metric-label">First Time Yield</div>
+      <div class="metric-desc">% of units passing all process steps without rework or scrap on the first attempt. Rolled Throughput Yield (RTY) across multi-step processes.</div>
+      <div class="metric-trend trend-up">↑ Target: >95%</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">COPQ</div>
+      <div class="metric-label">Cost of Poor Quality</div>
+      <div class="metric-desc">Internal failures (scrap, rework) + External failures (warranty, returns) + Appraisal + Prevention costs. Typically 5–30% of revenue in unmanaged organizations.</div>
+      <div class="metric-trend trend-down">↓ Eliminate waste costs</div>
+    </div>
+  </div>
+
+  <!-- Bar chart visual -->
+  <div class="chart-row">
+    <div class="chart-box">
+      <div class="chart-title">📈 Improvement Progress Tracker (Example)</div>
+      <svg viewBox="0 0 400 220" style="width:100%;overflow:visible;">
+        <defs>
+          <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.9"/>
+            <stop offset="100%" stop-color="#C9A84C" stop-opacity="0.3"/>
+          </linearGradient>
+        </defs>
+        <!-- Grid lines -->
+        <line x1="40" y1="20" x2="40" y2="180" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <line x1="40" y1="20" x2="380" y2="20" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <line x1="40" y1="60" x2="380" y2="60" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="40" y1="100" x2="380" y2="100" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="40" y1="140" x2="380" y2="140" stroke="rgba(255,255,255,0.06)" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="40" y1="180" x2="380" y2="180" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+        <!-- Baseline bar -->
+        <rect x="60" y="50" width="40" height="130" fill="rgba(255,71,87,0.4)" rx="3"/>
+        <text x="80" y="45" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#FF4757">18%</text>
+        <!-- Post bars -->
+        <rect x="130" y="110" width="40" height="70" fill="url(#barGrad)" rx="3"/>
+        <text x="150" y="105" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C9A84C">9.5%</text>
+        <rect x="200" y="145" width="40" height="35" fill="url(#barGrad)" rx="3"/>
+        <text x="220" y="140" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C9A84C">4.8%</text>
+        <rect x="270" y="163" width="40" height="17" fill="url(#barGrad)" rx="3"/>
+        <text x="290" y="158" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#C9A84C">2.3%</text>
+        <rect x="340" y="172" width="40" height="8" fill="rgba(0,201,167,0.6)" rx="3"/>
+        <text x="360" y="167" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#00C9A7">1.1%</text>
+        <!-- X labels -->
+        <text x="80" y="196" text-anchor="middle" font-family="DM Sans" font-size="9" fill="rgba(139,143,168,0.7)">Baseline</text>
+        <text x="150" y="196" text-anchor="middle" font-family="DM Sans" font-size="9" fill="rgba(139,143,168,0.7)">Month 1</text>
+        <text x="220" y="196" text-anchor="middle" font-family="DM Sans" font-size="9" fill="rgba(139,143,168,0.7)">Month 2</text>
+        <text x="290" y="196" text-anchor="middle" font-family="DM Sans" font-size="9" fill="rgba(139,143,168,0.7)">Month 3</text>
+        <text x="360" y="196" text-anchor="middle" font-family="DM Sans" font-size="9" fill="rgba(139,143,168,0.7)">Month 6</text>
+        <!-- Title -->
+        <text x="210" y="215" text-anchor="middle" font-family="Space Mono" font-size="8" fill="rgba(139,143,168,0.5)">DEFECT RATE REDUCTION — KAIZEN PROJECT</text>
+      </svg>
+    </div>
+    <div class="chart-box">
+      <div class="chart-title">🎯 SMART Goal Structure</div>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,0.15);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold);flex-shrink:0;">S</div>
+          <div><div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">Specific</div><div style="font-size:0.8rem;color:var(--text-muted);">Reduce invoice processing error rate in AP department</div></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(42,127,255,0.15);border:1px solid #2A7FFF;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;color:#2A7FFF;flex-shrink:0;">M</div>
+          <div><div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">Measurable</div><div style="font-size:0.8rem;color:var(--text-muted);">From 23% to ≤3% error rate (measured by audit)</div></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(0,201,167,0.15);border:1px solid #00C9A7;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;color:#00C9A7;flex-shrink:0;">A</div>
+          <div><div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">Achievable</div><div style="font-size:0.8rem;color:var(--text-muted);">Benchmarked — industry peers at 2% with similar tools</div></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,140,66,0.15);border:1px solid #FF8C42;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;color:#FF8C42;flex-shrink:0;">R</div>
+          <div><div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">Relevant</div><div style="font-size:0.8rem;color:var(--text-muted);">Links to customer satisfaction KPI and cost reduction goal</div></div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,71,87,0.15);border:1px solid #FF4757;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;color:#FF4757;flex-shrink:0;">T</div>
+          <div><div style="font-weight:600;font-size:0.88rem;color:var(--text-primary);">Time-Bound</div><div style="font-size:0.8rem;color:var(--text-muted);">Achieve by Q3 end; sustained for 90 days before closure</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- PDCA / DMAIC FLOWS -->
+<section id="pdca">
+  <div class="section-label">06 · Core Improvement Cycles</div>
+  <h2 class="section-title">PDCA & DMAIC:<br>The CI Engine</h2>
+  <p class="section-desc">All CI methods are anchored to structured improvement cycles. PDCA (Plan-Do-Check-Act) is the universal scientific method of improvement. DMAIC is the rigorous Six Sigma application of the same principle.</p>
+
+  <div style="margin-bottom:16px;">
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;">PDCA — Deming Cycle (Universal CI Engine)</span>
+  </div>
+  <div class="flow-container" style="margin-bottom:48px;">
+    <div class="flow-step">
+      <div class="flow-step-inner" style="border-color:rgba(42,127,255,0.3);background:rgba(42,127,255,0.05);">
+        <div class="flow-letter" style="color:#2A7FFF;">P</div>
+        <div class="flow-name" style="color:#2A7FFF;">Plan</div>
+        <div class="flow-desc">Identify the problem. Collect baseline data. Analyze root causes. Set target. Design solution. Define success metrics.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-inner" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.05);">
+        <div class="flow-letter" style="color:var(--gold);">D</div>
+        <div class="flow-name" style="color:var(--gold);">Do</div>
+        <div class="flow-desc">Implement the solution on a small scale / pilot. Train team. Execute countermeasures. Document actions taken.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-inner" style="border-color:rgba(0,201,167,0.3);background:rgba(0,201,167,0.05);">
+        <div class="flow-letter" style="color:#00C9A7;">C</div>
+        <div class="flow-name" style="color:#00C9A7;">Check</div>
+        <div class="flow-desc">Measure results against target. Analyze effectiveness. Did the solution work? Use data, not opinions.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-inner" style="border-color:rgba(255,140,66,0.3);background:rgba(255,140,66,0.05);">
+        <div class="flow-letter" style="color:#FF8C42;">A</div>
+        <div class="flow-name" style="color:#FF8C42;">Act</div>
+        <div class="flow-desc">If successful: standardize, deploy broadly, update SOPs. If not: return to Plan. Continuous loop — never ends.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-bottom:16px;">
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;">DMAIC — Six Sigma Structured Roadmap</span>
+  </div>
+  <div class="flow-container">
+    <div class="flow-step">
+      <div class="flow-step-inner" style="border-color:rgba(255,71,87,0.3);background:rgba(255,71,87,0.05);">
+        <div class="flow-letter" style="color:#FF4757;">D</div>
+        <div class="flow-name" style="color:#FF4757;">Define</div>
+        <div class="flow-desc">Project charter. VOC / CTQ tree. SIPOC. Scope statement. Business case. Team formation.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-inner" style="border-color:rgba(255,140,66,0.3);background:rgba(255,140,66,0.05);">
+        <div class="flow-letter" style="color:#FF8C42;">M</div>
+        <div class="flow-name" style="color:#FF8C42;">Measure</div>
+        <div class="flow-desc">Data collection plan. MSA (Gage R&R). Baseline sigma. Process mapping. Current state VSM.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-inner" style="border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.05);">
+        <div class="flow-letter" style="color:var(--gold);">A</div>
+        <div class="flow-name" style="color:var(--gold);">Analyze</div>
+        <div class="flow-desc">Root cause analysis. Hypothesis testing. Regression. Fishbone. 5 Whys. Multi-vari studies.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-inner" style="border-color:rgba(42,127,255,0.3);background:rgba(42,127,255,0.05);">
+        <div class="flow-letter" style="color:#2A7FFF;">I</div>
+        <div class="flow-name" style="color:#2A7FFF;">Improve</div>
+        <div class="flow-desc">DOE · Solution design · Pilot test · Implementation · FMEA on new process. Validate results.</div>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-inner" style="border-color:rgba(0,201,167,0.3);background:rgba(0,201,167,0.05);">
+        <div class="flow-letter" style="color:#00C9A7;">C</div>
+        <div class="flow-name" style="color:#00C9A7;">Control</div>
+        <div class="flow-desc">Control plan. SPC charts. Updated SOPs. Training. Handover to process owner. Project closure report.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- ENTERPRISE ECOSYSTEM -->
+<section id="ecosystem">
+  <div class="section-label">07 · Enterprise Architecture</div>
+  <h2 class="section-title">The CI Enterprise<br>Ecosystem</h2>
+  <p class="section-desc">CI does not exist in isolation. It is embedded within a layered organizational system — from culture and leadership at the top, down to individual daily habits at the operational level.</p>
+
+  <div class="eco-container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">The 5 Layers of CI Deployment</div>
+      <p style="color:var(--text-muted);font-size:0.9rem;">Each layer supports and enables the layers below it</p>
+    </div>
+    <div class="eco-layers">
+      <div class="eco-layer eco-layer-1">
+        <div class="eco-num">5</div>
+        <div class="eco-content">
+          <h4>Strategic Leadership Layer</h4>
+          <p>Hoshin Kanri · Executive sponsorship · CI as strategic priority · Resource allocation · Culture commitment · CEO/COO accountability</p>
+        </div>
+        <div class="eco-tags">
+          <span class="mtag">Board Level</span><span class="mtag">Strategy</span><span class="mtag">Culture</span>
+        </div>
+      </div>
+      <div class="eco-layer eco-layer-2">
+        <div class="eco-num">4</div>
+        <div class="eco-content">
+          <h4>Management Systems Layer</h4>
+          <p>ISO 9001/14001/45001 QMS · Policy Deployment · Balanced Scorecard · KPI Governance · A3 Reviews · Tiered Daily Management</p>
+        </div>
+        <div class="eco-tags">
+          <span class="mtag">QMS</span><span class="mtag">ISO</span><span class="mtag">KPIs</span>
+        </div>
+      </div>
+      <div class="eco-layer eco-layer-3">
+        <div class="eco-num">3</div>
+        <div class="eco-content">
+          <h4>Improvement Programs Layer</h4>
+          <p>Lean Transformation · Six Sigma Projects · VSM Programs · TPM · Kaizen Events Calendar · CI Project Portfolio Management</p>
+        </div>
+        <div class="eco-tags">
+          <span class="mtag">Lean</span><span class="mtag">Six Sigma</span><span class="mtag">Project Portfolio</span>
+        </div>
+      </div>
+      <div class="eco-layer eco-layer-4">
+        <div class="eco-num">2</div>
+        <div class="eco-content">
+          <h4>Tools & Methods Layer</h4>
+          <p>5S · SMED · Poka-Yoke · SPC · FMEA · A3 · 8D · Kanban · Gemba Walks · Visual Management · Root Cause Tools</p>
+        </div>
+        <div class="eco-tags">
+          <span class="mtag">CI Toolbox</span><span class="mtag">Problem-Solving</span>
+        </div>
+      </div>
+      <div class="eco-layer eco-layer-5">
+        <div class="eco-num">1</div>
+        <div class="eco-content">
+          <h4>Daily Operations Layer</h4>
+          <p>Standard Work · One-Point Lessons · Daily Huddles · Suggestion Systems · Operator Ownership · Continuous Learning Mindset</p>
+        </div>
+        <div class="eco-tags">
+          <span class="mtag">Front Line</span><span class="mtag">Daily Habits</span><span class="mtag">Culture</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8 Wastes -->
+  <div style="margin-bottom:24px;">
+    <div class="section-label">The 8 Wastes (TIMWOODS)</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:32px;">What We Are Always Fighting</h3>
+  </div>
+  <div class="methods-grid" style="margin-bottom:48px;">
+    <div class="method-card" style="padding:24px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">🚚</div>
+      <h3 style="font-size:1rem;">T — Transportation</h3>
+      <p style="font-size:0.82rem;">Unnecessary movement of materials, products, or information between locations. Each transfer risks damage, delay, and lost visibility.</p>
+    </div>
+    <div class="method-card" style="padding:24px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">📦</div>
+      <h3 style="font-size:1rem;">I — Inventory</h3>
+      <p style="font-size:0.82rem;">Excess raw material, WIP, or finished goods beyond immediate need. Ties up capital, hides problems, occupies space, and creates risk.</p>
+    </div>
+    <div class="method-card" style="padding:24px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">🚶</div>
+      <h3 style="font-size:1rem;">M — Motion</h3>
+      <p style="font-size:0.82rem;">Unnecessary movement of people (walking, reaching, bending). Ergonomic risk + productivity loss. Poor layout and workstation design.</p>
+    </div>
+    <div class="method-card" style="padding:24px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">⏳</div>
+      <h3 style="font-size:1rem;">W — Waiting</h3>
+      <p style="font-size:0.82rem;">Idle time when processes, people, or equipment wait for the next step. The most visible waste — often accepted as "normal."</p>
+    </div>
+    <div class="method-card" style="padding:24px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">🔧</div>
+      <h3 style="font-size:1rem;">O — Overprocessing</h3>
+      <p style="font-size:0.82rem;">Doing more than what the customer requires. More precision, more steps, more approvals than necessary. "Gold plating" a product.</p>
+    </div>
+    <div class="method-card" style="padding:24px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">🏭</div>
+      <h3 style="font-size:1rem;">O — Overproduction</h3>
+      <p style="font-size:0.82rem;">The worst waste — making more than needed, before needed, or faster than needed. Creates all other wastes downstream.</p>
+    </div>
+    <div class="method-card" style="padding:24px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">⚠️</div>
+      <h3 style="font-size:1rem;">D — Defects</h3>
+      <p style="font-size:0.82rem;">Products or services that don't meet requirements — requiring rework, scrap, or warranty. The most costly waste in customer-facing terms.</p>
+    </div>
+    <div class="method-card" style="padding:24px;">
+      <div style="font-size:1.8rem;margin-bottom:10px;">🧠</div>
+      <h3 style="font-size:1rem;">S — Skills (Unused)</h3>
+      <p style="font-size:0.82rem;">Underutilizing people's knowledge, creativity, and experience. The most human and most impactful waste — the 8th waste added to Lean.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- MATURITY MODEL -->
+<section id="maturity">
+  <div class="section-label">08 · Organizational Readiness</div>
+  <h2 class="section-title">CI Maturity Model</h2>
+  <p class="section-desc">Before selecting improvement methods, organizations must honestly assess their current CI maturity. The right method for a Level 1 organization is very different from a Level 4 enterprise.</p>
+
+  <div class="maturity-grid">
+    <div class="mat-level mat-level-1">
+      <div class="mat-num">1</div>
+      <div class="mat-title">Reactive</div>
+      <div class="mat-desc">Fire-fighting culture. No formal CI. Improvement happens by accident. Leadership focused on immediate crises only.</div>
+    </div>
+    <div class="mat-level mat-level-2">
+      <div class="mat-num">2</div>
+      <div class="mat-title">Aware</div>
+      <div class="mat-desc">CI concepts introduced. Pilot projects exist. Some tools deployed (5S). Limited training. Sporadic results. Improvement is individual, not systemic.</div>
+    </div>
+    <div class="mat-level mat-level-3">
+      <div class="mat-num">3</div>
+      <div class="mat-title">Structured</div>
+      <div class="mat-desc">Formal CI program. Belt certifications. Project pipeline. KPI dashboards. CI embedded in annual plans. Leaders are sponsors. Sustained gains in key areas.</div>
+    </div>
+    <div class="mat-level mat-level-4">
+      <div class="mat-num">4</div>
+      <div class="mat-title">Integrated</div>
+      <div class="mat-desc">CI aligned to strategy (Hoshin). All levels participate. Process owners lead improvement. CI part of performance reviews. Cross-functional collaboration. Data-driven culture.</div>
+    </div>
+    <div class="mat-level mat-level-5">
+      <div class="mat-num">5</div>
+      <div class="mat-title">Excellent</div>
+      <div class="mat-desc">Operational Excellence embedded. CI is the culture, not a program. Innovation and CI coexist. Benchmarking externally. Teaching others. Self-sustaining system.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h4>🗺️ Maturity-Based Method Selection</h4>
+    <p><strong style="color:#FF4757;">Level 1–2:</strong> Start with 5S, Gemba Walks, Visual Management, 5 Whys. Build foundation. <br>
+    <strong style="color:var(--gold);">Level 3:</strong> Introduce DMAIC projects, VSM, Kaizen events, A3 thinking. <br>
+    <strong style="color:#2A7FFF;">Level 4:</strong> Deploy Hoshin Kanri, TPM, DOE, advanced SPC, Lean Transformation. <br>
+    <strong style="color:#00C9A7;">Level 5:</strong> Lead with Design Thinking + Industry 4.0 + Digital Lean + TOC integration.</p>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- AUDIENCE SECTION -->
+<section id="audience">
+  <div class="section-label">09 · Who This Is For</div>
+  <h2 class="section-title">Identifying Your Audience<br>& Their CI Path</h2>
+  <p class="section-desc">CI knowledge must be calibrated to the learner's role, context, and responsibility. Different audiences need different tools, different depth, and different entry points into the CI journey.</p>
+
+  <div class="audience-grid">
+    <div class="aud-card">
+      <div class="aud-icon">👔</div>
+      <div class="aud-role">C-Suite / Executives</div>
+      <div class="aud-desc">Need to understand CI as a strategic investment. Focus on culture, ROI, maturity, and Hoshin alignment. Sponsors, not operators.</div>
+      <div class="aud-methods">
+        <span class="aud-tag">Hoshin Kanri</span>
+        <span class="aud-tag">Balanced Scorecard</span>
+        <span class="aud-tag">TQM</span>
+        <span class="aud-tag">OpEx</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-icon">📋</div>
+      <div class="aud-role">Middle Management</div>
+      <div class="aud-desc">CI project sponsors and champions. Must coach teams, allocate resources, and sustain gains. Bridge between strategy and execution.</div>
+      <div class="aud-methods">
+        <span class="aud-tag">A3 Thinking</span>
+        <span class="aud-tag">VSM</span>
+        <span class="aud-tag">DMAIC</span>
+        <span class="aud-tag">Gemba Walk</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-icon">🎓</div>
+      <div class="aud-role">CI / Quality Leaders</div>
+      <div class="aud-desc">Deploy, coach, and develop the CI system. Black/Green Belt certified. Design training, manage project portfolios, and report to leadership.</div>
+      <div class="aud-methods">
+        <span class="aud-tag">Six Sigma</span>
+        <span class="aud-tag">DOE</span>
+        <span class="aud-tag">SPC</span>
+        <span class="aud-tag">FMEA</span>
+        <span class="aud-tag">8D</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-icon">🔧</div>
+      <div class="aud-role">Process Engineers</div>
+      <div class="aud-desc">Technically skilled in process analysis. Apply tools to specific technical problems. Lead improvement projects with data and rigor.</div>
+      <div class="aud-methods">
+        <span class="aud-tag">DMAIC</span>
+        <span class="aud-tag">DOE</span>
+        <span class="aud-tag">Cpk</span>
+        <span class="aud-tag">FMEA</span>
+        <span class="aud-tag">Poka-Yoke</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-icon">👷</div>
+      <div class="aud-role">Front-Line Operators</div>
+      <div class="aud-desc">Closest to the work — most valuable source of CI ideas. Need simple, visual, empowering tools. The heartbeat of Kaizen culture.</div>
+      <div class="aud-methods">
+        <span class="aud-tag">5S</span>
+        <span class="aud-tag">5 Whys</span>
+        <span class="aud-tag">Kaizen</span>
+        <span class="aud-tag">Andon</span>
+        <span class="aud-tag">Visual Mgmt</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-icon">💻</div>
+      <div class="aud-role">IT / Digital Teams</div>
+      <div class="aud-desc">Apply CI in software contexts. Agile/Scrum IS a CI framework. Retrospectives = PDCA. Digital tools accelerate traditional CI methods.</div>
+      <div class="aud-methods">
+        <span class="aud-tag">Agile/Scrum</span>
+        <span class="aud-tag">Kanban</span>
+        <span class="aud-tag">DevOps</span>
+        <span class="aud-tag">Design Thinking</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-icon">📞</div>
+      <div class="aud-role">Service / HR / Finance</div>
+      <div class="aud-desc">CI applies everywhere — not just manufacturing. Lean Office, transactional process improvement, and administrative waste are major opportunities.</div>
+      <div class="aud-methods">
+        <span class="aud-tag">Lean Office</span>
+        <span class="aud-tag">DMAIC</span>
+        <span class="aud-tag">A3</span>
+        <span class="aud-tag">5S for Offices</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <div class="aud-icon">🎓</div>
+      <div class="aud-role">Students / New Entrants</div>
+      <div class="aud-desc">Building foundational literacy. Start with the philosophy, history, and basic tools. Progressive learning toward certification and application.</div>
+      <div class="aud-methods">
+        <span class="aud-tag">PDCA</span>
+        <span class="aud-tag">5S</span>
+        <span class="aud-tag">7 QC Tools</span>
+        <span class="aud-tag">Lean Basics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- KPI TABLE -->
+<section id="kpi">
+  <div class="section-label">10 · KPI Reference</div>
+  <h2 class="section-title">Complete CI Metrics &<br>KPI Reference</h2>
+  <p class="section-desc">A structured reference of the most critical CI metrics — how they are calculated, what good looks like, and how to monitor them systematically.</p>
+
+  <table class="kpi-table">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th>Category</th>
+        <th>Formula / Calculation</th>
+        <th>World-Class Target</th>
+        <th>Monitoring Frequency</th>
+        <th>Priority</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="kpi-name">Defect Rate (DPMO)</div>Defects per Million Opportunities</td>
+        <td><span class="pill red" style="font-size:8px;">Quality</span></td>
+        <td style="font-family:'Space Mono',monospace;font-size:0.8rem;">(Defects / Total Opportunities) × 1,000,000</td>
+        <td>≤3.4 DPMO (6σ)</td>
+        <td>Weekly / Real-time</td>
+        <td><div class="dot-bar"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></td>
+      </tr>
+      <tr>
+        <td><div class="kpi-name">OEE — Overall Equipment Effectiveness</div></td>
+        <td><span class="pill gold" style="font-size:8px;">Asset</span></td>
+        <td style="font-family:'Space Mono',monospace;font-size:0.8rem;">Availability × Performance × Quality</td>
+        <td>≥85%</td>
+        <td>Daily / Shift</td>
+        <td><div class="dot-bar"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></td>
+      </tr>
+      <tr>
+        <td><div class="kpi-name">Cycle Time</div>Process speed end-to-end</td>
+        <td><span class="pill blue" style="font-size:8px;">Speed</span></td>
+        <td style="font-family:'Space Mono',monospace;font-size:0.8rem;">End time – Start time (per unit or transaction)</td>
+        <td>≤ Takt Time</td>
+        <td>Daily</td>
+        <td><div class="dot-bar"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot empty"></div></div></td>
+      </tr>
+      <tr>
+        <td><div class="kpi-name">First Time Yield (FTY)</div>Right first time rate</td>
+        <td><span class="pill red" style="font-size:8px;">Quality</span></td>
+        <td style="font-family:'Space Mono',monospace;font-size:0.8rem;">(Units passed without rework / Total units) × 100</td>
+        <td>≥98%</td>
+        <td>Daily / Weekly</td>
+        <td><div class="dot-bar"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot empty"></div></div></td>
+      </tr>
+      <tr>
+        <td><div class="kpi-name">Cost of Poor Quality (COPQ)</div></td>
+        <td><span class="pill gold" style="font-size:8px;">Financial</span></td>
+        <td style="font-family:'Space Mono',monospace;font-size:0.8rem;">Internal failures + External failures + Appraisal</td>
+        <td>&lt;1% of Revenue</td>
+        <td>Monthly / Quarterly</td>
+        <td><div class="dot-bar"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot empty"></div></div></td>
+      </tr>
+      <tr>
+        <td><div class="kpi-name">Kaizen Ideas per Employee</div>Engagement metric</td>
+        <td><span class="pill teal" style="font-size:8px;">Culture</span></td>
+        <td style="font-family:'Space Mono',monospace;font-size:0.8rem;">Total ideas submitted / Total headcount</td>
+        <td>≥12/year per person</td>
+        <td>Monthly</td>
+        <td><div class="dot-bar"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot empty"></div><div class="dot empty"></div></div></td>
+      </tr>
+      <tr>
+        <td><div class="kpi-name">Project Completion Rate</div>CI project pipeline health</td>
+        <td><span class="pill blue" style="font-size:8px;">Program</span></td>
+        <td style="font-family:'Space Mono',monospace;font-size:0.8rem;">(Projects closed on time / Projects started) × 100</td>
+        <td>≥80%</td>
+        <td>Monthly</td>
+        <td><div class="dot-bar"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot empty"></div><div class="dot empty"></div></div></td>
+      </tr>
+      <tr>
+        <td><div class="kpi-name">CI ROI (Return on Investment)</div></td>
+        <td><span class="pill gold" style="font-size:8px;">Financial</span></td>
+        <td style="font-family:'Space Mono',monospace;font-size:0.8rem;">($ Benefits – $ Costs) / $ Costs × 100%</td>
+        <td>≥500% (5:1)</td>
+        <td>Per project + Annual</td>
+        <td><div class="dot-bar"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></td>
+      </tr>
+      <tr>
+        <td><div class="kpi-name">Customer Satisfaction (CSAT/NPS)</div></td>
+        <td><span class="pill teal" style="font-size:8px;">Customer</span></td>
+        <td style="font-family:'Space Mono',monospace;font-size:0.8rem;">NPS = % Promoters – % Detractors (–100 to +100)</td>
+        <td>NPS ≥50</td>
+        <td>Quarterly / Per touchpoint</td>
+        <td><div class="dot-bar"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div></div></td>
+      </tr>
+      <tr>
+        <td><div class="kpi-name">Process Capability (Cpk)</div></td>
+        <td><span class="pill red" style="font-size:8px;">Quality</span></td>
+        <td style="font-family:'Space Mono',monospace;font-size:0.8rem;">min[(USL–μ)/3σ, (μ–LSL)/3σ]</td>
+        <td>≥1.33 (≥1.67 automotive)</td>
+        <td>Continuous / Batch</td>
+        <td><div class="dot-bar"><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot empty"></div></div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- CI Learning Path Visual -->
+  <div style="background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:48px;margin-top:48px;">
+    <div class="section-label" style="margin-bottom:16px;">Your CI Learning Roadmap</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:32px;">From Awareness to Excellence</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;">
+      <div style="text-align:center;padding:24px 16px;border-radius:8px;border:1px solid rgba(255,71,87,0.2);background:rgba(255,71,87,0.04);">
+        <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#FF4757;margin-bottom:8px;">Step 1</div>
+        <div style="font-size:0.85rem;font-weight:600;margin-bottom:8px;">Learn the Philosophy</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">Why CI matters · History · PDCA · Waste concepts · Deming's 14 Points</div>
+      </div>
+      <div style="text-align:center;padding:24px 16px;border-radius:8px;border:1px solid rgba(255,140,66,0.2);background:rgba(255,140,66,0.04);">
+        <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#FF8C42;margin-bottom:8px;">Step 2</div>
+        <div style="font-size:0.85rem;font-weight:600;margin-bottom:8px;">Apply Basic Tools</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">5S · 5 Whys · Pareto · Fishbone · Gemba Walk · Visual Management</div>
+      </div>
+      <div style="text-align:center;padding:24px 16px;border-radius:8px;border:1px solid rgba(201,168,76,0.2);background:rgba(201,168,76,0.04);">
+        <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold);margin-bottom:8px;">Step 3</div>
+        <div style="font-size:0.85rem;font-weight:600;margin-bottom:8px;">Lead a Project</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">A3 · Kaizen event · VSM · DMAIC Green Belt · Measure & track results</div>
+      </div>
+      <div style="text-align:center;padding:24px 16px;border-radius:8px;border:1px solid rgba(42,127,255,0.2);background:rgba(42,127,255,0.04);">
+        <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#2A7FFF;margin-bottom:8px;">Step 4</div>
+        <div style="font-size:0.85rem;font-weight:600;margin-bottom:8px;">Build the System</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">Six Sigma BB · Hoshin Kanri · TPM · QMS · CI culture programs</div>
+      </div>
+      <div style="text-align:center;padding:24px 16px;border-radius:8px;border:1px solid rgba(0,201,167,0.2);background:rgba(0,201,167,0.04);">
+        <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#00C9A7;margin-bottom:8px;">Step 5</div>
+        <div style="font-size:0.85rem;font-weight:600;margin-bottom:8px;">Teach & Sustain</div>
+        <div style="font-size:0.78rem;color:var(--text-muted);">Coach others · OpEx leadership · Digital Lean · Benchmark globally · CI culture</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">The Quality Edge Group</div>
+  <div class="footer-author">Subramanian Shanmugam · Quality Excellence Governance</div>
+  <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:32px;">
+    <span class="pill gold">ISO 9001</span>
+    <span class="pill teal">Lean Six Sigma</span>
+    <span class="pill blue">Operational Excellence</span>
+    <span class="pill gold">Continuous Improvement</span>
+  </div>
+  <div style="height:1px;background:var(--border);max-width:400px;margin:0 auto 24px;"></div>
+  <div class="footer-copy">© 2024 The Quality Edge Group · Subramanian Shanmugam · Quality Excellence Governance<br>All rights reserved. This framework is developed for enterprise learning and educational purposes.</div>
+</div>
+
+<script>
+// Animate elements on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.method-card, .def-card, .metric-card, .mat-level, .aud-card, .eco-layer').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+
+// Smooth counter animation for metrics
+function animateValue(el, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+    el.textContent = Math.floor(progress * (end - start) + start);
+    if (progress < 1) window.requestAnimationFrame(step);
+  };
+  window.requestAnimationFrame(step);
+}
+</script>
+</body>
+</html>
